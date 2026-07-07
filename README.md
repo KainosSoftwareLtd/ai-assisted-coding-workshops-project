@@ -1,6 +1,6 @@
 # Kainos Task List — Workshop Template
 
-Training template for an AI-Assisted Coding workshop. The project is a **Chrome Extension Task List app** that grows across 5 tasks, each adding a new layer while practising AI-assisted coding with GitHub Copilot and Claude.
+Training template for an AI-Assisted Coding workshop. The project is a **browser-based Task List app** that grows across 5 tasks, each adding a new layer while practising AI-assisted coding with GitHub Copilot and Claude.
 
 ---
 
@@ -11,7 +11,7 @@ Install **before** the workshop:
 1. **VS Code** — https://code.visualstudio.com/
 2. **GitHub Copilot** — subscription or trial required
    (Ctrl+Shift+X → search "GitHub Copilot" → install both Copilot + Copilot Chat)
-3. **Google Chrome** — latest version
+3. **A modern browser** — Chrome, Edge, Firefox, or Safari
 4. **OpenRouter API key** — needed for Task 5 only:
    - Create a free account at https://openrouter.ai/
    - Generate an API key at https://openrouter.ai/keys
@@ -22,18 +22,16 @@ Install **before** the workshop:
 
 ## Running the Project
 
-No `npm install`, no bundler, no Live Server needed. The app runs as a Chrome Extension.
+No `npm install`, no bundler, and no build step. The app runs as static HTML, CSS, and JavaScript in a browser.
 
 1. Clone the repo: `git clone <url>`
-2. Open Chrome and go to `chrome://extensions`
-3. Enable **Developer mode** (toggle in the top-right corner)
-4. Click **Load unpacked** and select the project root folder
-5. The Kainos Task List icon appears in the Chrome toolbar — click it to open the popup
-6. Done
+2. Open the project folder in VS Code
+3. Open `index.html` in your browser
+4. Done
 
-**After every code change:** click the refresh icon (↺) on the extension tile in `chrome://extensions`, then reopen the popup.
+**After every code change:** refresh the browser page.
 
-**Debugging:** right-click the popup → **Inspect** → Console tab.
+**Debugging:** open browser developer tools → Console tab.
 
 ---
 
@@ -41,18 +39,15 @@ No `npm install`, no bundler, no Live Server needed. The app runs as a Chrome Ex
 
 | File / Folder | Purpose |
 |---|---|
-| `manifest.json` | Chrome Extension configuration (Manifest V3) |
-| `popup.html` | Popup UI — structure + all CSS (Kainos theme) |
+| `index.html` | Main task-list UI — structure + all CSS (Kainos theme) |
 | `popup.js` | Application logic — all function stubs for Tasks 1–5 |
 | `options.html` | Settings page — OpenRouter API key input |
 | `options.js` | Settings logic — stubs for Task 5 |
-| `icons/` | Extension icons (16, 48, 128 px) |
-| `TASKS.md` | Full description of all 5 workshop tasks (trainer reference) |
-| `CONVENTIONS.md` | Code conventions + working-with-AI tips |
-| `PROMPTS.md` | Prompt library (trainer reference) |
-| `.github/copilot-instructions.md` | AI context file for GitHub Copilot |
-
-> **Icons note:** Generate `icons/icon16.png`, `icons/icon48.png`, and `icons/icon128.png` before loading the extension. Use [favicon.io](https://favicon.io/favicon-generator/) or any icon tool. A reference SVG is provided in `icons/icon.svg`.
+| `icons/` | Legacy/reference icon assets |
+| `AGENTS.md` | Quick-start guide for future coding agents |
+| `.github/copilot-instructions.md` | Additional AI context for GitHub Copilot |
+| `.github/agents/` | Backlog Assistant agent configuration and reference docs |
+| `.backlog/` | Backlog template configuration |
 
 ---
 
@@ -60,7 +55,7 @@ No `npm install`, no bundler, no Live Server needed. The app runs as a Chrome Ex
 
 | Task | What you build |
 |---|---|
-| Task 1 | Add tasks & persist with `chrome.storage.local` |
+| Task 1 | Add tasks & persist locally in the browser |
 | Task 2 | Mark done & delete with event delegation |
 | Task 3 | Filter bar (All / Active / Done) & task counter |
 | Task 4 | Due dates, urgency badges & sorting |
@@ -90,7 +85,7 @@ git checkout task-1        # start here
 
 git checkout -b my-task-1  # your working branch
 # … code with Copilot …
-git add . && git commit -m "feat: add and display todos with chrome.storage"
+git add . && git commit -m "feat: add and display todos with browser storage"
 
 # Stuck? Check the next branch for a working reference:
 git stash                  # save your work
@@ -101,7 +96,7 @@ git checkout task-2        # has Task 1 already done
 
 ## Technical Requirements
 
-- Browser: **Google Chrome** (required — extension APIs are Chrome-specific)
+- A modern browser
 - VS Code with GitHub Copilot
 - Internet connection (GitHub Copilot, OpenRouter API for Task 5)
 
