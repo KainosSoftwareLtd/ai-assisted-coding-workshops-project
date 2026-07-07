@@ -2,7 +2,7 @@ const STORAGE_KEY = 'kainos-todo:todos';
 
 const state = {
   todos: [
-    // TODO Task 1: remove these hardcoded todos and load from chrome.storage.local instead
+    // TODO Task 1: remove these hardcoded todos and load from localStorage instead
     { id: 1, text: 'Listen carefully to the trainer 🎧', done: true, createdAt: '2026-01-01T09:00:00.000Z', priority: null },
     { id: 2, text: 'Stop asking ChatGPT, use Copilot instead', done: false, createdAt: '2026-01-01T10:00:00.000Z', priority: null },
     { id: 3, text: 'Actually read the prompt before hitting Enter', done: false, createdAt: '2026-01-01T11:00:00.000Z', priority: null },
