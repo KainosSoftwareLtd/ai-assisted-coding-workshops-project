@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Kainos Task List",
+  "description": "Training Chrome extension for AI-assisted coding workshops.",
+  "version": "1.0.0",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Kainos Task List",
+    "default_popup": "index.html"
+  },
+  "options_page": "options.html"
+}
