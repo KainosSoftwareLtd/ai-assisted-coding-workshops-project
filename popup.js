@@ -1,13 +1,7 @@
 const STORAGE_KEY = 'kainos-todo:todos';
 
 const state = {
-  todos: [
-    // TODO Task 1: remove these hardcoded todos and load from localStorage instead
-    { id: 1, text: 'Listen carefully to the trainer 🎧', done: true, createdAt: '2026-01-01T09:00:00.000Z', priority: null },
-    { id: 2, text: 'Stop asking ChatGPT, use Copilot instead', done: false, createdAt: '2026-01-01T10:00:00.000Z', priority: null },
-    { id: 3, text: 'Actually read the prompt before hitting Enter', done: false, createdAt: '2026-01-01T11:00:00.000Z', priority: null },
-    { id: 4, text: 'Work hard on tasks (yes, all 5 of them)', done: false, createdAt: '2026-01-01T12:00:00.000Z', priority: null },
-  ],
+  todos: [],
   filter: 'all',
   aiLoading: false,
 };
@@ -15,15 +9,39 @@ const state = {
 // ── Persistence ────────────────────────────────────────────────
 
 function loadState() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      state.todos = JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to parse saved todos:', e);
+      state.todos = [];
+    }
+  }
   render();
 }
 
 function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.todos));
 }
 
 // ── Business logic ─────────────────────────────────────────────
 
 function addTodo(text) {
+  const trimmed = text.trim();
+  if (!trimmed) return; // Ignore empty input
+
+  const newTodo = {
+    id: Date.now(),
+    text: trimmed,
+    done: false,
+    createdAt: new Date().toISOString(),
+    priority: null,
+  };
+
+  state.todos.push(newTodo);
+  saveState();
+  render();
 }
 
 function toggleTodo(id) {
@@ -90,6 +108,15 @@ function render() {
 // ── Event wiring ───────────────────────────────────────────────
 
 function initHandlers() {
+
+  // Add form submission
+  document.getElementById('add-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('todo-input');
+    addTodo(input.value);
+    input.value = '';
+    input.focus();
+  });
 
   // Options link
   document.getElementById('options-link').addEventListener('click', (e) => {
